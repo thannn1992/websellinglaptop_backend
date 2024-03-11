@@ -13,12 +13,18 @@ import than.MK.weblaptop.backend.entity.User;
 
 @Configuration
 public class MethodRestConfig implements RepositoryRestConfigurer {
-    private String url = "http://localhost:8080";
+    //private String url = "http://localhost:8080";
+    //private String url = "http://localhost:3000";
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+
+        //CORS configuration
+        //allow http://localhost:3000 to access backend and allow method get post put delete
+        //cors.addMapping("/**").allowedOrigins(url).allowedMethods("GET", "POST", "PUT", "DELETE");
+
         HttpMethod[] blockMethods = {
                 HttpMethod.POST,
                 HttpMethod.PUT,

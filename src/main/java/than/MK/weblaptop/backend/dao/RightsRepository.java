@@ -8,5 +8,6 @@ import than.MK.weblaptop.backend.entity.Rights;
 
 @RepositoryRestResource(path = "rights")
 public interface RightsRepository extends JpaRepository<Rights, Integer> {
+    public Rights findByRightName(String rightName);
 
 }

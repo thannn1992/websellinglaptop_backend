@@ -49,11 +49,18 @@ public class Laptop {
     private String operatingSystem;
     @Column(name = "display_size")
     private String displaySize;
+    @Column(name="coating")
+    private String coating;
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "model_id")
+    private Model model;
 
     @ManyToMany( fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
