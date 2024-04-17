@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserServiceInterface{
         }
         // lấy user này import org.springframework.security.core.userdetails.UserDetails;
         org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), rolesToAuthorities(user.getListRight()));
-
         return userDetails;
     }
 

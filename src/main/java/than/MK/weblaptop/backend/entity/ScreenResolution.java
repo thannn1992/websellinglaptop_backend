@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "screen_resolution")
 public class ScreenResolution {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "screen_resolution_id")
@@ -17,9 +18,7 @@ public class ScreenResolution {
     private String screenResolutionName;
     @Column(name = "color_accuracy")
     private String colorAccuracy;
-
     @OneToMany(mappedBy = "screenResolution", fetch = FetchType.LAZY, cascade = {
-                    CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+                CascadeType.PERSIST,  CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Laptop> laptops;
-
 }

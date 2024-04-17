@@ -22,7 +22,10 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
+          CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
     })
     private List<Laptop> laptops;
+
+    @Column(name = "model_description", columnDefinition = "LONGTEXT")
+    private  String modelDescription;
 }

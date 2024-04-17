@@ -17,9 +17,8 @@ public class GraphicsCard {
     private String graphicsCardName;
     @Column(name = "graphics_card_type")
     private String graphicsCardType;
-    @ManyToMany( fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
-    })
+
+    @ManyToMany
     @JoinTable(
             name = "laptop_graphics_card",
             joinColumns = @JoinColumn(name = "graphics_card_id"),

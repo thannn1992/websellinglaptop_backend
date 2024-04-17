@@ -19,9 +19,9 @@ public class Picture {
     private String pictureLink;
     @Column(name = "picture_data", columnDefinition = "LONGTEXT")
     private String pictureData;
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
-    })
+    @ManyToOne //(cascade = {
+            //CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+    //})
     @JoinColumn(name = "laptop_id", nullable = false)
     private Laptop laptop;
 }

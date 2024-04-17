@@ -17,9 +17,7 @@ public class HardDriver {
     private String hardDriverName;
     @Column(name = "hard_driver_type")
     private String hardDriverType;
-    @ManyToMany( fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
-    })
+    @ManyToMany
     @JoinTable(
             name = "laptop_hard_driver",
             joinColumns = @JoinColumn(name = "hard_driver_id"),

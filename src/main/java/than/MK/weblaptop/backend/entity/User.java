@@ -3,6 +3,7 @@ package than.MK.weblaptop.backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,9 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "gender")
-    private boolean gender;
+    private byte gender;
+    @Column(name = "birthDay")
+    private Date birthDay;
     @Column(name = "email")
     private String email;
     @Column(name = "phone_number")
@@ -37,6 +40,7 @@ public class User {
     private Boolean activate;
     @Column(name="code_active")
     private String codeActive;
+
 
     @Column(name = "avatar", columnDefinition = "LONGTEXT")
     @Lob

@@ -16,10 +16,15 @@ public class Brand {
     private int brandID;
     @Column(name = "brand_name", length = 256)
     private String brandName;
+
+    @Column(name = "brand_description", columnDefinition = "LONGTEXT")
+    private  String brandDescription;
+
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
+         CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
     })
     private List<Laptop> laptops;
+
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = {
             CascadeType.ALL
     })

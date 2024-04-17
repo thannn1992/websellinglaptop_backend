@@ -1,5 +1,6 @@
 package than.MK.weblaptop.backend.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -62,6 +63,23 @@ public class AccountController {
             return ResponseEntity.badRequest().body("Tên đăng nhập hoặc mật khẩu không chính xác.");
         }
         return ResponseEntity.badRequest().body("Xác thực không thành công.");
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateAccount(@RequestBody User user, HttpServletRequest request){
+
+        String authHeader = request.getHeader("Authorization");
+        String token = null;
+        String username = null;
+        if(authHeader!=null && authHeader.startsWith("Bearer ")){
+            token = authHeader.substring(7);
+            username = jwtService.extractUserName(token);
+        }
+      if(username != null){
+          user.setUserName(username);
+      }
+        ResponseEntity<?> response = accountService.updateUser(user);
+        return response;
     }
 
 //    @PostMapping("/login")

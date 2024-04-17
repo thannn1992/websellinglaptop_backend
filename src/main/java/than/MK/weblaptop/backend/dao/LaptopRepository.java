@@ -10,11 +10,13 @@ import than.MK.weblaptop.backend.entity.Laptop;
 
 @RepositoryRestResource(path = "laptop")
 public interface LaptopRepository extends JpaRepository<Laptop, Integer> {
+
     Page<Laptop>  findByLaptopNameContaining(@RequestParam("laptopName") String laptopName, Pageable pageable);
     // taking laptop by Brand and BrandID , amazing good job
     Page<Laptop>  findByBrand_BrandID(@RequestParam("brandID") int brandID, Pageable pageable);
+    Page<Laptop>  findByModel_ModelID(@RequestParam("modelID") int modelID, Pageable pageable);
     Page<Laptop>  findByBrand_BrandIDAndLaptopNameContaining(@RequestParam("brandID") int brandID, @RequestParam("laptopName") String laptopName, Pageable pageable);
 
-
+    public boolean existsByLaptopName(String laptopName);
 
 }

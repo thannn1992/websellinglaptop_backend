@@ -44,61 +44,73 @@ public class Laptop {
     @Column(name = "upgrade_ability_disk_drive")
     private String upgradeAbilityDiskDrive;
     @Column(name = "webcam")
-    private String webCam;
+    private String webcam;
     @Column(name = "operating_system")
     private String operatingSystem;
     @Column(name = "display_size")
     private String displaySize;
-    @Column(name="coating")
+    @Column(name = "coating")
     private String coating;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @Column(name = "audio_technology")
+    private String audioTechnology;
+
+    @Column(name = "sd_micro_sd_card_slot")
+    private String sdMicroSdCardSlot;
+
+    @Column(name = "wifi")
+    private String wifi;
+
+    @Column(name = "ltd_wwan_connection")
+    private String lteWwanConnection;
+
+    @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
+    //No cascade here //No cascade here as when laptop update brand don't update, if have cascade will have error: detached entity passed to persist
     @JoinColumn(name = "model_id")
     private Model model;
 
-    @ManyToMany( fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(  cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+    })
     @JoinTable(
             name = "laptop_graphics_card",
             joinColumns = @JoinColumn(name = "laptop_id"),
             inverseJoinColumns = @JoinColumn(name = "graphics_card_id"))
     private List<GraphicsCard> listGraphicsCard;
 
-    @ManyToMany( fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
-    })
+    @ManyToMany (  cascade = {
+          CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+   })
     @JoinTable(
             name = "laptop_hard_driver",
             joinColumns = @JoinColumn(name = "laptop_id"),
             inverseJoinColumns = @JoinColumn(name = "hard_driver_id"))
     private List<HardDriver> listHardDriver;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
+    //No cascade here as when laptop update brand don't update, if have cascade will have error: detached entity passed to persist
     @JoinColumn(name = "processor_id")
     private Processor processor;
 
-    @OneToMany(mappedBy = "laptop", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "laptop", cascade = {
             CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<ItemsInCast> listItemsInCast;
 
-    @OneToMany(mappedBy = "laptop", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "laptop", cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<Picture> listPictures;
-    @OneToMany(mappedBy = "laptop", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "laptop", cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<Review> listReview;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
+    //No cascade here as when laptop update brand don't update, if have cascade will have error: detached entity passed to persist
     @JoinColumn(name = "screen_resolution_id")
     private ScreenResolution screenResolution;
-
 
 }

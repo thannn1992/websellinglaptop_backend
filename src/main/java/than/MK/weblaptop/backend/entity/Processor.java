@@ -19,8 +19,9 @@ public class Processor {
     private String maxTurboFrequency;
     @Column(name = "cache")
     private String cache;
+
     @OneToMany(mappedBy = "processor", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
+         CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
     })
     private List<Laptop> laptops;
 

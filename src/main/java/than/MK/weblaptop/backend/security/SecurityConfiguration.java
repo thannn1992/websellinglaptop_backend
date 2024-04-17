@@ -22,8 +22,8 @@ import java.util.Arrays;
 
 @Configuration
 public class SecurityConfiguration {
-    @Autowired
-    private JwtFillter jwtFillter;
+  @Autowired
+ private JwtFillter jwtFillter;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -42,15 +42,15 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
+        //Không tạo session vì đã sử dụng token để xác thực biết request của ai trên server
         httpSecurity.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
                 config -> config
                         .requestMatchers(HttpMethod.POST, Endpoints.PUBLIC_POST_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, Endpoints.PUBLIC_GET_ENDPOINT).permitAll()
-                        .requestMatchers(HttpMethod.POST, Endpoints.ADMIN_POST_ENDPOINT).hasRole("Admin")
-                        .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINT).hasRole("Admin")
+                        .requestMatchers(HttpMethod.POST, Endpoints.ADMIN_POST_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINT).permitAll()
         );
         httpSecurity.cors(cors -> {
             cors.configurationSource(request -> {
@@ -62,9 +62,8 @@ public class SecurityConfiguration {
             });
         });
 
-        httpSecurity.addFilterBefore(jwtFillter, UsernamePasswordAuthenticationFilter.class);
-        //Không tạo session vì đã sử dụng token để xác thực biết request của ai trên server
-        httpSecurity.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    httpSecurity.addFilterBefore(jwtFillter, UsernamePasswordAuthenticationFilter.class);
+
         httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.csrf(csrf -> csrf.disable());
         return httpSecurity.build();
